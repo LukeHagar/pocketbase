@@ -1,6 +1,7 @@
 FROM alpine:latest
 
 ARG PB_VERSION=0.15.3
+ENV PB_ENCRYPTION_KEY
 
 RUN apk add --no-cache \
     unzip \
@@ -13,4 +14,4 @@ RUN unzip /tmp/pb.zip -d /pb/
 EXPOSE 8080
 
 # start PocketBase
-CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080"]
+CMD ["/pb/pocketbase", "serve", "--http=0.0.0.0:8080", "--encryptionEnv=PB_ENCRYPTION_KEY"]
