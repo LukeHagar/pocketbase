@@ -1,7 +1,8 @@
 FROM alpine:latest
 
 ARG PB_VERSION=0.15.3
-ENV PB_ENCRYPTION_KEY
+ARG ENCRYPTION_KEY
+ENV PB_ENCRYPTION_KEY=$ENCRYPTION_KEY
 
 RUN apk add --no-cache \
     unzip \
