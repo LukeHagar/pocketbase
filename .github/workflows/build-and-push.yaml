@@ -43,7 +43,7 @@ jobs:
 
       - name: Print latest ${{ matrix.release_type }} Docker Image Version
         run: |
-          cat latest_docker_version
+          echo "The current ${{ matrix.release_type }} docker version is ${{ env.LATEST_DOCKER_VERSION }}"
         id: print_docker_version
 
       - name: Check if latest version is different
