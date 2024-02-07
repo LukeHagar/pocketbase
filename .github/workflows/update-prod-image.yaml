@@ -26,8 +26,9 @@ jobs:
       - name: Check latest Docker Image Version
         run: |
           docker pull lukehagar/pocketbase:latest
-          docker inspect lukehagar/pocketbase:latest --format='{{index .Config.Labels "org.opencontainers.image.version"}}' > latest_docker_version
+          docker inspect lukehagar/pocketbase:latest --format='{{index .Config.Labels "org.opencontainers.image.version"}}' > latest_docker_version || echo "default_version" > latest_docker_version
         id: latest_docker_version
+        continue-on-error: true
 
       - name: Print latest Docker Image Version
         run: |
