@@ -25,8 +25,8 @@ jobs:
 
       - name: Check latest Pre-release Docker Image Version
         run: |
-          docker pull lukehagar/pocketbase:latest
-          docker inspect lukehagar/pocketbase:latest --format='{{index .Config.Labels "org.opencontainers.image.version"}}' > latest_docker_version
+          docker pull lukehagar/pocketbase:pre-release
+          docker inspect lukehagar/pocketbase:pre-release --format='{{index .Config.Labels "org.opencontainers.image.version"}}' > latest_docker_version
         id: latest_docker_version
 
       - name: Print latest Pre-release Docker Image Version
@@ -35,15 +35,15 @@ jobs:
         id: print_docker_version
 
       - name: Check if latest version is different
+        id: check_version
         run: |
           if [ "$(cat latest_version)" != "$(cat latest_docker_version)" ]; then
-            echo "Versions are different"
-            echo "::set-output name=build::true"
+              echo "Versions are different"
+              echo "BUILD=true" >> $GITHUB_OUTPUT
           else
-            echo "Versions are the same"
-            echo "::set-output name=build::false"
+              echo "Versions are the same"
+              echo "BUILD=false" >> $GITHUB_OUTPUT
           fi
-        id: check_version
 
       - name: Set up QEMU
         if: steps.check_version.outputs.build == 'true'
