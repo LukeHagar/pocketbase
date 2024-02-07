@@ -23,13 +23,13 @@ jobs:
           else
             curl -s https://api.github.com/repos/pocketbase/pocketbase/releases | jq -r '.[] | select(.prerelease == true and .draft == false) | .tag_name' | head -n 1 | sed 's/^v//' > latest_version
           fi
-          echo "BUILD=${cat latest_version}" >> $GITHUB_OUTPUT
+          echo "LATEST_VERSION=${cat latest_version}" >> $GITHUB_ENV
         id: latest_version
 
       - name: Print Pocketbase Version
         run: |
           cat latest_version
-          echo ${{ steps.latest_version.outputs.latest_version }}
+          echo "The current pocketbase version is ${{ env.LATEST_VERSION }}"
         id: print_version
 
       - name: Check latest ${{ matrix.release_type }} Docker Image Version
@@ -48,7 +48,7 @@ jobs:
       - name: Check if latest version is different
         id: check_version
         run: |
-          if [ "$(cat latest_version)" != "$(cat latest_docker_version)" ]; then
+          if [ "${{env.LATEST_VERSION}}" != "$(cat latest_docker_version)" ]; then
               echo "Versions are different"
               echo "BUILD=true" >> $GITHUB_OUTPUT
           else
@@ -77,4 +77,4 @@ jobs:
         with:
           push: true
           tags: lukehagar/pocketbase:${{ matrix.release_type }}
-          build-args: POCKETBASE_VERSION="${{ steps.latest_version.outputs.latest_version }}"
+          build-args: POCKETBASE_VERSION="${{ env.LATEST_VERSION }}"
