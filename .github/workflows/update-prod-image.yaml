@@ -1,4 +1,4 @@
-name: Build Docker Image
+name: Build and Push Latest Production Docker Image
 
 on:
   push:
@@ -9,12 +9,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  docker:
+  production-build-and-push:
+    name: Build and Push Latest Production Docker Image
     runs-on: ubuntu-latest
     steps:
       - name: Check latest Pocketbase Version
         run: |
-          curl -s https://api.github.com/repos/pocketbase/pocketbase/releases/latest | jq -r '.tag_name' > latest_version
+          curl -s https://api.github.com/repos/pocketbase/pocketbase/releases | jq -r '.[] | select(.prerelease == false and .draft == false) | .tag_name' | head -n 1 > latest_version
         id: latest_version
 
       - name: Print latest Pocketbase Version
