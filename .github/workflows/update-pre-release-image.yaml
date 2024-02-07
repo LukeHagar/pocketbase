@@ -68,5 +68,4 @@ jobs:
         with:
           push: true
           tags: lukehagar/pocketbase:pre-release
-          build-args: |
-            POCKETBASE_VERSION=$(cat latest_version)
+          build-args: POCKETBASE_VERSION="$(cat latest_version)"
