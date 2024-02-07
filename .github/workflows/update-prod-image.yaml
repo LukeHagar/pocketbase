@@ -15,7 +15,8 @@ jobs:
     steps:
       - name: Check latest Pocketbase Version
         run: |
-          curl -s https://api.github.com/repos/pocketbase/pocketbase/releases | jq -r '.[] | select(.prerelease == false and .draft == false) | .tag_name' | head -n 1 > latest_version
+          curl -s https://api.github.com/repos/pocketbase/pocketbase/releases | jq -r '.[] | select(.prerelease == false and .draft == false) | .tag_name' | head -n 1 | sed 's/^v//' > latest_version
+          echo "BUILD=${latest_version}" >> $GITHUB_OUTPUT
         id: latest_version
 
       - name: Print latest Pocketbase Version
@@ -68,4 +69,4 @@ jobs:
         with:
           push: true
           tags: lukehagar/pocketbase:latest
-          build-args: POCKETBASE_VERSION="$(cat latest_version)"
+          build-args: POCKETBASE_VERSION="${{ steps.latest_version.outputs.latest_version }}"
