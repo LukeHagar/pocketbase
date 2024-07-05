@@ -79,3 +79,16 @@ jobs:
           push: true
           tags: lukehagar/pocketbase:${{ matrix.release_type }}
           build-args: POCKETBASE_VERSION=${{ env.LATEST_VERSION }}
+
+      - name: Update Changelog
+        if: steps.check_version.outputs.build == 'true'
+        run: |
+          echo "Updating changelog"
+          echo "## ${{ env.LATEST_VERSION }}" >> CHANGELOG.md
+          echo "- ${{ matrix.release_type }} release" >> CHANGELOG.md
+          echo "" >> CHANGELOG.md
+          cat CHANGELOG.md
+        continue-on-error: true
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+
