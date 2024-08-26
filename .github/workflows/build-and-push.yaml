@@ -79,3 +79,14 @@ jobs:
           push: true
           tags: lukehagar/pocketbase:${{ matrix.release_type }}
           build-args: POCKETBASE_VERSION=${{ env.LATEST_VERSION }}
+
+      - name: Update Changelog
+        run: |
+          curl -s https://raw.githubusercontent.com/pocketbase/pocketbase/master/CHANGELOG.md > CHANGELOG.md
+      
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Update changelog for ${{ env.LATEST_VERSION }}
+          
+          
