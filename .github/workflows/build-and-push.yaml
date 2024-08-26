@@ -16,6 +16,11 @@ jobs:
       matrix:
         release_type: ["latest", "pre-release"]
     steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          
       - name: Check latest Pocketbase Version
         run: |
           if [ "${{ matrix.release_type }}" = "latest" ]; then
