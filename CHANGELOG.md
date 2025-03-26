@@ -1,3 +1,12 @@
+## v0.26.4
+
+- Fixed `RecordErrorEvent.Error` and `CollectionErrorEvent.Error` sync with `ModelErrorEvent.Error` ([#6639](https://github.com/pocketbase/pocketbase/issues/6639)).
+
+- Fixed logs details clipboard copy.
+
+- Updated `modernc.org/sqlite` to 1.36.2.
+
+
 ## v0.26.3
 
 - Fixed and normalized logs error serialization across common types for more consistent logs error output ([#6631](https://github.com/pocketbase/pocketbase/issues/6631)).
