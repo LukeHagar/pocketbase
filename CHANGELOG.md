@@ -1,3 +1,14 @@
+## v0.27.1
+
+- Updated example `geoPoint` API preview body data.
+
+- Added JSVM `new GeoPointField({ ... })` constructor.
+
+- Added _partial_ WebP thumbs generation (_the thumbs will be stored as PNG_; [#6744](https://github.com/pocketbase/pocketbase/pull/6744)).
+
+- Updated npm dev dependencies.
+
+
 ## v0.27.0
 
 - ⚠️ Moved the Create and Manage API rule checks out of the `OnRecordCreateRequest` hook finalizer, **aka. now all CRUD API rules are checked BEFORE triggering their corresponding `*Request` hook**.
