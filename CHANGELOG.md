@@ -1,3 +1,14 @@
+## v0.29.1
+
+- Updated the X/Twitter provider to return the `confirmed_email` field and to use the `x.com` domain ([#7035](https://github.com/pocketbase/pocketbase/issues/7035)).
+
+- Added Box.com OAuth2 provider ([#7056](https://github.com/pocketbase/pocketbase/pull/7056); thanks @blakepatteson).
+
+- Updated `modernc.org/sqlite` to 1.38.2 (SQLite 3.50.3).
+
+- Fixed example List API response ([#7049](https://github.com/pocketbase/pocketbase/pull/7049); thanks @williamtguerra).
+
+
 ## v0.29.0
 
 - Enabled calling the `/auth-refresh` endpoint with nonrenewable tokens.
@@ -6,8 +17,6 @@
 - Added the triggered rate rimit rule in the error log `details`.
 
 - Added optional `ServeEvent.Listener` field to initialize a custom network listener (e.g. `unix`) instead of the default `tcp` ([#3233](https://github.com/pocketbase/pocketbase/discussions/3233)).
-
-- Added `toBytes` JSVM helper ([#6935](https://github.com/pocketbase/pocketbase/issues/6935)).
 
 - Fixed request data unmarshalization for the `DynamicModel` array/object fields ([#7022](https://github.com/pocketbase/pocketbase/discussions/7022)).
 
@@ -18,7 +27,7 @@
 
 ## v0.28.4
 
-- Added global JSVM `toBytes()` helper to return the bytes slice representation of a value such as io.Reader or string (_other types are first serialized to Go string_).
+- Added global JSVM `toBytes()` helper to return the bytes slice representation of a value such as io.Reader or string, _other types are first serialized to Go string_ ([#6935](https://github.com/pocketbase/pocketbase/issues/6935)).
 
 - Fixed `security.RandomStringByRegex` random distribution ([#6947](https://github.com/pocketbase/pocketbase/pull/6947); thanks @yerTools).
 
