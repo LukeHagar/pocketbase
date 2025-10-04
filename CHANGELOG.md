@@ -1,3 +1,13 @@
+## v0.30.1
+
+- ⚠️ Excluded the `lost+found` directory from the backups ([#7208](https://github.com/pocketbase/pocketbase/pull/7208); thanks @lbndev).
+    _If for some reason you want to keep it, you can restore it by editing the `e.Exclude` list of the `OnBackupCreate` and `OnBackupRestore` hooks._
+
+- Minor tests improvements (disabled initial superuser creation for the test app to avoid cluttering the std output, added more tests for the `s3.Uploader.MaxConcurrency`, etc.).
+
+- Updated `modernc.org/sqlite` and other Go dependencies.
+
+
 ## v0.30.0
 
 - Eagerly escape the S3 request path following the same rules as in the S3 signing header ([#7153](https://github.com/pocketbase/pocketbase/issues/7153)).
