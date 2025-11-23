@@ -1,3 +1,23 @@
+## v0.34.0
+
+- Added `@request.body.someField:changed` modifier.
+    It could be used when you want to ensure that a body field either wasn't submitted or was submitted with the same value.
+    Or in other words, if you want to disallow a field change the below 2 expressions would be equivalent:
+    ```js
+    // (old)
+    (@request.body.someField:isset = false || @request.body.someField = someField)
+
+    // (new)
+    @request.body.someField:changed = false
+    ```
+
+- Added `MailerRecordEvent.Meta["info"]` property for the `OnMailerRecordAuthAlertSend` hook.
+
+- Updated the backup restore popup with a short info about the performed restore steps.
+
+- Updated Go deps.
+
+
 ## v0.33.0
 
 - Added extra `id` characters validation in addition to the user specified regex pattern ([#7312](https://github.com/pocketbase/pocketbase/issues/7312)).
@@ -242,7 +262,7 @@
     If you are having difficulties adjusting your code, feel free to open a [Q&A discussion](https://github.com/pocketbase/pocketbase/discussions) with the failing/problematic code sample.
 
 - Added [new `geoPoint` field](https://pocketbase.io/docs/collections/#geopoint) for storing `{"lon":x,"lat":y}` geographic coordinates.
-    In addition, a new [`geoDistance(lonA, lotA, lonB, lotB)` function](htts://pocketbase.io/docs/api-rules-and-filters/#geodistancelona-lata-lonb-latb) was also implemented that could be used to apply an API rule or filter constraint based on the distance (in km) between 2 geo points.
+    In addition, a new [`geoDistance(lonA, lotA, lonB, lotB)` function](https://pocketbase.io/docs/api-rules-and-filters/#geodistancelona-lata-lonb-latb) was also implemented that could be used to apply an API rule or filter constraint based on the distance (in km) between 2 geo points.
 
 - Updated the `select` field UI to accommodate better larger lists and RTL languages ([#4674](https://github.com/pocketbase/pocketbase/issues/4674)).
 
